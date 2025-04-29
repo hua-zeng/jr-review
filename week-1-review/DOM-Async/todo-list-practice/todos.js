@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Hard-coded user and todos array
   const user = 'TRYDENT';
-  const todos = [{name: 'star the trydent repo'}];
+  const todos = [{ name: 'star the trydent repo' }];
 
   // Create and display the title header
   const title = document.createElement('h1');
@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle the deletion of a todo
   document.querySelector('#todoDiv').addEventListener('click', (e) => {
     if (e.target.className === 'todoDelete') {
-      const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
+      const todoIndex = Array.from(
+        e.target.parentNode.parentNode.children
+      ).indexOf(e.target.parentNode);
       console.log('To delete:', todoIndex);
       todos.splice(todoIndex, 1); // Remote the task from the local todos array
       e.target.parentNode.remove(); // Remove the task from the DOM
@@ -82,13 +84,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Action when the "Create a New ToDo" form is submitted
-  document.querySelector('#create-todo-submit').addEventListener('click', (e) => {
-    e.preventDefault();
-    const todoName = document.querySelector('#create-todo-name').value;
-    const task = {
-      name: todoName,
-    };
-    todos.push(task); // Add the new task to the local todos array
-    addTaskToDOM(task); // Add the new task to the DOM
-  });
+  document
+    .querySelector('#create-todo-submit')
+    .addEventListener('click', (e) => {
+      e.preventDefault();
+      const todoName = document.querySelector('#create-todo-name').value;
+      const task = {
+        name: todoName,
+      };
+      todos.push(task); // Add the new task to the local todos array
+      addTaskToDOM(task); // Add the new task to the DOM
+    });
+
+  const newDiv = document.createElement('div');
+  newDiv.innerText = 'This is a new div';
+  document.body.appendChild(newDiv);
+
+  // test button
+  const button = document.querySelector('#test-button');
+
+  // function will log 'Button clicked!'
+  function handleClick() {
+    todos.length = 0;
+
+    const todoDiv = document.querySelector('#todoDiv');
+    todoDiv.innerHTML = '';
+
+    console.log('All tasks cleared!');
+  }
+
+  // listening for a 'click' event on the button. When the event happens, runs handleClick
+  button.addEventListener('click', handleClick);
 });
